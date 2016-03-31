@@ -13,7 +13,7 @@
         android:layout_height="35dp"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_et_bg"
-        android:hint="请输入密码"
+        android:hint="@string/et_hint_input_password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"/>
 
@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_et_bg"
-        android:hint="请输入用户名"
+        android:hint="@string/et_hint_input_username"
         android:paddingLeft="5dp"/>
 
     <ImageView
@@ -44,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/selector_btn_login"
-        android:text="登 录"
+        android:text="@string/btn_login"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 
@@ -52,7 +52,7 @@
         android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新用户注册"
+        android:text="@string/tv_new_user_register"
         android:textColor="@drawable/selector_login_text_color"
         android:background="@color/white"
         android:layout_alignParentBottom="true"
