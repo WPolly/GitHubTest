@@ -67,6 +67,10 @@ public class XmppConnectionManager {
         }
     }
 
+    public void logout() {
+        mXMPPTCPConnection.disconnect();
+    }
+
     public void register(String username, String password) {
         try {
             if (!mXMPPTCPConnection.isConnected()) {
