@@ -1,4 +1,4 @@
-package com.xiaoshan.mytencentqq.activity.proxy;
+package com.xiaoshan.mytencentqq.proxy;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;

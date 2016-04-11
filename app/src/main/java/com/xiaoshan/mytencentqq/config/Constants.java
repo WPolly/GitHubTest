@@ -1,4 +1,4 @@
-package com.xiaoshan.mytencentqq.activity.config;
+package com.xiaoshan.mytencentqq.config;
 
 /**
  * Created by xiaoshan on 2016/4/8.

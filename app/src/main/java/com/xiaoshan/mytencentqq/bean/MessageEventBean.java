@@ -1,4 +1,4 @@
-package com.xiaoshan.mytencentqq.activity.bean;
+package com.xiaoshan.mytencentqq.bean;
 
 /**
  * Created by xiaoshan on 2016/4/8.

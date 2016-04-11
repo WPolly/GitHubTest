@@ -1,7 +1,7 @@
-package com.xiaoshan.mytencentqq.activity.factory;
+package com.xiaoshan.mytencentqq.factory;
 
 
-import com.xiaoshan.mytencentqq.activity.proxy.ThreadPoolProxy;
+import com.xiaoshan.mytencentqq.proxy.ThreadPoolProxy;
 
 /**
  * Created by xiaoshan on 2016/2/18.

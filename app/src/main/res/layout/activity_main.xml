@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.xiaoshan.mytencentqq.activity.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="联系人"
+        app:titleTextColor="@color/white"
+        />
+
+    <FrameLayout
+        android:id="@+id/fl_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iv_bottom_tab"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View style="@style/placeholder"/>
+
+        <ImageView
+            android:id="@+id/iv_conversation"
+            android:layout_width="@dimen/iv_bottom_tab"
+            android:layout_height="@dimen/iv_bottom_tab"
+            android:background="@drawable/selector_conversation"/>
+
+        <View style="@style/placeholder"/>
+
+        <ImageView
+            android:id="@+id/iv_contact"
+            android:layout_width="@dimen/iv_bottom_tab"
+            android:layout_height="@dimen/iv_bottom_tab"
+            android:background="@drawable/selector_contact"/>
+
+        <View style="@style/placeholder"/>
+
+        <ImageView
+            android:id="@+id/iv_situation"
+            android:layout_width="@dimen/iv_bottom_tab"
+            android:layout_height="@dimen/iv_bottom_tab"
+            android:background="@drawable/selector_situation"/>
+
+        <View style="@style/placeholder"/>
+    </LinearLayout>
+</LinearLayout>

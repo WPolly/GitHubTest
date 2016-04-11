@@ -1,14 +1,16 @@
-package com.xiaoshan.mytencentqq.activity.manager;
+package com.xiaoshan.mytencentqq.manager;
 
-import com.xiaoshan.mytencentqq.activity.bean.MessageEventBean;
-import com.xiaoshan.mytencentqq.activity.config.Constants;
+import com.xiaoshan.mytencentqq.bean.MessageEventBean;
+import com.xiaoshan.mytencentqq.config.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.XMPPError;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smackx.iqregister.AccountManager;
 
 import java.io.IOException;
 
@@ -17,6 +19,11 @@ import java.io.IOException;
  * 14:41
  */
 public class XmppConnectionManager {
+    public static final String LOGIN_SUCCEED = "登录成功";
+    public static final String LOGIN_FAILED = "登录失败";
+    public static final String USER_EXIST = "该用户名已存在";
+    public static final String REGISTER_SUCCEED = "注册成功";
+    public static final String REGISTER_FAILED = "注册失败";
     private static XmppConnectionManager ourInstance = null;
     private XMPPTCPConnection mXMPPTCPConnection;
 
@@ -53,10 +60,32 @@ public class XmppConnectionManager {
                 mXMPPTCPConnection.connect();
             }
             mXMPPTCPConnection.login(username, password);
-            EventBus.getDefault().post(new MessageEventBean("登录成功"));
+            EventBus.getDefault().post(new MessageEventBean(LOGIN_SUCCEED));
         } catch (SmackException | IOException | XMPPException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new MessageEventBean("登录失败"));
+            EventBus.getDefault().post(new MessageEventBean(LOGIN_FAILED));
+        }
+    }
+
+    public void register(String username, String password) {
+        try {
+            if (!mXMPPTCPConnection.isConnected()) {
+                mXMPPTCPConnection.connect();
+            }
+            AccountManager accountManager = AccountManager.getInstance(mXMPPTCPConnection);
+            accountManager.createAccount(username,password);
+            EventBus.getDefault().post(new MessageEventBean(REGISTER_SUCCEED));
+        } catch (SmackException | IOException e) {
+            e.printStackTrace();
+            EventBus.getDefault().post(new MessageEventBean(REGISTER_FAILED));
+        } catch (XMPPException e) {
+            if (e instanceof XMPPException.XMPPErrorException) {
+                XMPPError.Condition condition = ((XMPPException.XMPPErrorException) e).getXMPPError().getCondition();
+                if (condition == XMPPError.Condition.conflict) {
+                    EventBus.getDefault().post(new MessageEventBean(USER_EXIST));
+                }
+            }
+            EventBus.getDefault().post(new MessageEventBean(REGISTER_FAILED));
         }
     }
 }
