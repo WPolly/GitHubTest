@@ -25,6 +25,8 @@
         android:layout_weight="1">
     </FrameLayout>
 
+    <include layout="@layout/divider_line"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/iv_bottom_tab"

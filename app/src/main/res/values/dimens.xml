@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="iv_bottom_tab">60dp</dimen>
+    <dimen name="image_height">55dp</dimen>
 </resources>

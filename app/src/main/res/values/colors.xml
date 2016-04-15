@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="lightBlue">#32BED4</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="divider_line_back">#666666</color>
+    <color name="divider_list_contacts">#88333333</color>
 </resources>

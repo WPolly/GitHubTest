@@ -8,6 +8,7 @@ import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.XMPPError;
+import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.iqregister.AccountManager;
@@ -26,6 +27,7 @@ public class XmppConnectionManager {
     public static final String REGISTER_FAILED = "注册失败";
     private static XmppConnectionManager ourInstance = null;
     private XMPPTCPConnection mXMPPTCPConnection;
+    private Roster mRoster;
 
     public static XmppConnectionManager getInstance() {
         if (ourInstance == null) {
@@ -54,23 +56,6 @@ public class XmppConnectionManager {
         mXMPPTCPConnection.setUseStreamManagement(true);
     }
 
-    public void login(String username, String password) {
-        try {
-            if (!mXMPPTCPConnection.isConnected()) {
-                mXMPPTCPConnection.connect();
-            }
-            mXMPPTCPConnection.login(username, password);
-            EventBus.getDefault().post(new MessageEventBean(LOGIN_SUCCEED));
-        } catch (SmackException | IOException | XMPPException e) {
-            e.printStackTrace();
-            EventBus.getDefault().post(new MessageEventBean(LOGIN_FAILED));
-        }
-    }
-
-    public void logout() {
-        mXMPPTCPConnection.disconnect();
-    }
-
     public void register(String username, String password) {
         try {
             if (!mXMPPTCPConnection.isConnected()) {
@@ -91,5 +76,27 @@ public class XmppConnectionManager {
             }
             EventBus.getDefault().post(new MessageEventBean(REGISTER_FAILED));
         }
+    }
+
+    public void login(String username, String password) {
+        try {
+            if (!mXMPPTCPConnection.isConnected()) {
+                mXMPPTCPConnection.connect();
+            }
+            mXMPPTCPConnection.login(username, password);
+            EventBus.getDefault().post(new MessageEventBean(LOGIN_SUCCEED));
+            mRoster = Roster.getInstanceFor(mXMPPTCPConnection);
+        } catch (SmackException | IOException | XMPPException e) {
+            e.printStackTrace();
+            EventBus.getDefault().post(new MessageEventBean(LOGIN_FAILED));
+        }
+    }
+
+    public Roster getRoster() {
+        return mRoster;
+    }
+
+    public void logout() {
+        mXMPPTCPConnection.disconnect();
     }
 }
