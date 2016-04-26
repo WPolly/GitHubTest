@@ -13,6 +13,7 @@ import com.xiaoshan.mytencentqq.R;
 import com.xiaoshan.mytencentqq.bean.MessageEventBean;
 import com.xiaoshan.mytencentqq.factory.ThreadPoolFactory;
 import com.xiaoshan.mytencentqq.manager.XmppConnectionManager;
+import com.xiaoshan.mytencentqq.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -79,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Toast.makeText(RegisterActivity.this, event.message, Toast.LENGTH_SHORT).show();
-                if (XmppConnectionManager.REGISTER_SUCCEED.equals(event.message)) {
+                if (UIUtils.getString(R.string.register_succeed).equals(event.message)) {
                     finish();
                 }
             }

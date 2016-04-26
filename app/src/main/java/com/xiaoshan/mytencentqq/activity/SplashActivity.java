@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.xiaoshan.mytencentqq.R;
+import com.xiaoshan.mytencentqq.manager.XmppConnectionManager;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,7 +39,8 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            Class cls = XmppConnectionManager.getInstance().isLogin() ? MainActivity.class : LoginActivity.class;
+            Intent intent = new Intent(SplashActivity.this, cls);
             startActivity(intent);
             finish();
         }

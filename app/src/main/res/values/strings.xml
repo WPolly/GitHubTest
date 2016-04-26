@@ -5,4 +5,9 @@
     <string name="et_hint_input_password">请输入密码</string>
     <string name="et_hint_input_username">请输入用户名</string>
     <string name="entry_count_in_group">%1$d</string>
+    <string name="login_succeed">登录成功</string>
+    <string name="login_failed">登录失败</string>
+    <string name="user_exist">该用户名已存在</string>
+    <string name="register_succeed">注册成功</string>
+    <string name="register_failed">注册失败</string>
 </resources>

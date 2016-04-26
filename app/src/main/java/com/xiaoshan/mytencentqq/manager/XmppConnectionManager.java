@@ -1,7 +1,9 @@
 package com.xiaoshan.mytencentqq.manager;
 
+import com.xiaoshan.mytencentqq.R;
 import com.xiaoshan.mytencentqq.bean.MessageEventBean;
 import com.xiaoshan.mytencentqq.config.Constants;
+import com.xiaoshan.mytencentqq.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -20,11 +22,6 @@ import java.io.IOException;
  * 14:41
  */
 public class XmppConnectionManager {
-    public static final String LOGIN_SUCCEED = "登录成功";
-    public static final String LOGIN_FAILED = "登录失败";
-    public static final String USER_EXIST = "该用户名已存在";
-    public static final String REGISTER_SUCCEED = "注册成功";
-    public static final String REGISTER_FAILED = "注册失败";
     private static XmppConnectionManager ourInstance = null;
     private XMPPTCPConnection mXMPPTCPConnection;
     private Roster mRoster;
@@ -62,19 +59,19 @@ public class XmppConnectionManager {
                 mXMPPTCPConnection.connect();
             }
             AccountManager accountManager = AccountManager.getInstance(mXMPPTCPConnection);
-            accountManager.createAccount(username,password);
-            EventBus.getDefault().post(new MessageEventBean(REGISTER_SUCCEED));
+            accountManager.createAccount(username, password);
+            EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.register_succeed)));
         } catch (SmackException | IOException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new MessageEventBean(REGISTER_FAILED));
+            EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.register_failed)));
         } catch (XMPPException e) {
             if (e instanceof XMPPException.XMPPErrorException) {
                 XMPPError.Condition condition = ((XMPPException.XMPPErrorException) e).getXMPPError().getCondition();
                 if (condition == XMPPError.Condition.conflict) {
-                    EventBus.getDefault().post(new MessageEventBean(USER_EXIST));
+                    EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.user_exist)));
                 }
             }
-            EventBus.getDefault().post(new MessageEventBean(REGISTER_FAILED));
+            EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.register_failed)));
         }
     }
 
@@ -84,12 +81,16 @@ public class XmppConnectionManager {
                 mXMPPTCPConnection.connect();
             }
             mXMPPTCPConnection.login(username, password);
-            EventBus.getDefault().post(new MessageEventBean(LOGIN_SUCCEED));
+            EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.login_succeed)));
             mRoster = Roster.getInstanceFor(mXMPPTCPConnection);
         } catch (SmackException | IOException | XMPPException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new MessageEventBean(LOGIN_FAILED));
+            EventBus.getDefault().post(new MessageEventBean(UIUtils.getString(R.string.login_failed)));
         }
+    }
+
+    public boolean isLogin() {
+        return mXMPPTCPConnection.isAuthenticated();
     }
 
     public Roster getRoster() {
@@ -98,5 +99,6 @@ public class XmppConnectionManager {
 
     public void logout() {
         mXMPPTCPConnection.disconnect();
+        initConnection();
     }
 }

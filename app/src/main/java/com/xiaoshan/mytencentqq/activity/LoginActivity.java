@@ -17,6 +17,7 @@ import com.xiaoshan.mytencentqq.bean.MessageEventBean;
 import com.xiaoshan.mytencentqq.config.Constants;
 import com.xiaoshan.mytencentqq.factory.ThreadPoolFactory;
 import com.xiaoshan.mytencentqq.manager.XmppConnectionManager;
+import com.xiaoshan.mytencentqq.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -94,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Toast.makeText(LoginActivity.this, event.message, Toast.LENGTH_SHORT).show();
-                if (XmppConnectionManager.LOGIN_SUCCEED.equals(event.message)) {
+                if (UIUtils.getString(R.string.login_succeed).equals(event.message)) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
