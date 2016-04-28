@@ -36,6 +36,10 @@ public class ContactsExpandableListAdapter extends BaseExpandableListAdapter {
 
     public ContactsExpandableListAdapter(Context context) {
         this.mContext = context;
+        initData();
+    }
+
+    public void initData() {
         mRoster = XmppConnectionManager.getInstance().getRoster();
         mGroupCount = mRoster.getGroupCount();
         Collection<RosterGroup> groups = mRoster.getGroups();
@@ -149,5 +153,7 @@ public class ContactsExpandableListAdapter extends BaseExpandableListAdapter {
         }
     }
 
-
+    public ArrayList<RosterGroup> getRosterGroups() {
+        return mRosterGroups;
+    }
 }

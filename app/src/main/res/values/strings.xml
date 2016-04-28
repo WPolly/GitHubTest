@@ -10,4 +10,11 @@
     <string name="user_exist">该用户名已存在</string>
     <string name="register_succeed">注册成功</string>
     <string name="register_failed">注册失败</string>
+    <string name="user_already_in_roster">您已经添加过该用户</string>
+    <string name="user_not_exist">用户不存在</string>
+    <string name="user_add_succeed">添加好友成功</string>
+    <string name="user_add_failed">添加好友失败</string>
+    <string name="group_already_exist">该好友分组已存在</string>
+    <string name="group_add_succeed">添加新分组成功</string>
+    <string name="group_add_failed">添加新分组失败</string>
 </resources>
